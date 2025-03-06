@@ -1,15 +1,24 @@
-document.querySelectorAll(".show-more-btn").forEach(button => {
-    button.addEventListener("click", () => {
-        const details = button.previousElementSibling;
-        details.classList.toggle("visible");
+document.querySelectorAll('.show-more-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const details = button.previousElementSibling; // Select details paragraph
+        const projectCard = button.closest('.project'); // Select full project card
+        
+        details.classList.toggle('hidden');
+        projectCard.classList.toggle('expanded'); // Expand card
 
-        if (details.classList.contains("visible")) {
-            button.textContent = "Show Less";
+        // Smooth Show/Hide Effect
+        if (!details.classList.contains('hidden')) {
+            details.style.display = 'block';
+            setTimeout(() => details.style.opacity = '1', 10);
         } else {
-            button.textContent = "Show More";
+            details.style.opacity = '0';
+            setTimeout(() => details.style.display = 'none', 300);
         }
+
+        button.textContent = details.classList.contains('hidden') ? 'Show More' : 'Show Less';
     });
 });
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
